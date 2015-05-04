@@ -18,7 +18,13 @@ class Api::V1::ItemsControllerTest < ActionController::TestCase
     assert_equal "Dog", first_item[:name]
     assert_equal "This is a dog", first_item[:description]
   end
-  # test "the truth" do
-  #   assert true
-  # end
+
+  test "create" do 
+    # need item { } to mimic strong params
+    post :create, format: :json, item: { name: "Horse", description: "This is a horse." }
+    item = JSON.parse(response.body, symbolize_names: true)
+    assert_response :success
+    assert_equal "Horse", item[:name]
+    assert_equal "This is a horse.", item[:description]
+  end
 end
