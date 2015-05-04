@@ -1,0 +1,9 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  name: Cat
+  description: I am a cat.
+
+two:
+  name: Cow
+  description: I am a cow.
