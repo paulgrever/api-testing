@@ -28,6 +28,14 @@ class Api::V1::ItemsControllerTest < ActionController::TestCase
     assert_response :success
     assert_equal "Horse", item[:name]
     assert_equal "This is a horse.", item[:description]
+  end
 
+  test "update" do 
+    old_item = Item.create(name: "Dog", description: "This is a dog")
+    put :update, format: :json, id: old_item.id, item: { name: "Cat-Dog", description: "This is a cat-dog." }
+    new_item = Item.find(old_item.id)
+    assert_response :success
+    assert_equal "Cat-Dog", new_item.name
+    assert_equal "This is a cat-dog.", new_item.description
   end
 end
