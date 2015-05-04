@@ -20,11 +20,14 @@ class Api::V1::ItemsControllerTest < ActionController::TestCase
   end
 
   test "create" do 
+    assert_difference('Item.count', 1) do #this is how you can test the difference
     # need item { } to mimic strong params
-    post :create, format: :json, item: { name: "Horse", description: "This is a horse." }
+      post :create, format: :json, item: { name: "Horse", description: "This is a horse." }
+    end
     item = JSON.parse(response.body, symbolize_names: true)
     assert_response :success
     assert_equal "Horse", item[:name]
     assert_equal "This is a horse.", item[:description]
+
   end
 end
